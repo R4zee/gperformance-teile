@@ -1,0 +1,18 @@
+---
+import Base from '../../../../../layouts/Base.astro';
+import Configurator from '../../../../../components/config/Configurator.tsx';
+import { getVehicles } from '../../../../../lib/catalog';
+import type { Part, VehicleCatalog } from '../../../../../lib/types';
+
+export async function getStaticPaths() {
+  return (await getVehicles()).flatMap(v => {
+    const [make, model, gen] = v.key.split('/');
+    return v.parts.map(p => ({ params: { make, model, gen, cat: p.cat, part: p.slug }, props: { v, p } }));
+  });
+}
+const { v, p } = Astro.props as { v: VehicleCatalog; p: Part };
+const name = `${v.make.name} ${v.model.name} ${v.gen.name}`;
+---
+<Base title={`${p.brand} ${p.name} für ${name} – G Performance`} description={p.quote || p.note} footer={false}>
+  <Configurator client:load cat={v} initialCat={p.cat} initialPart={p.id} />
+</Base>

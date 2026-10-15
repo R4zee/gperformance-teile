@@ -1,0 +1,27 @@
+{
+  "title": "BMW M4 F82 – BMW M Performance Titan-Schalldämpfer",
+  "vehicle": "bmw/m4/f82",
+  "category": "abgas",
+  "order": 3,
+  "stock": false,
+  "brand": "BMW M Performance",
+  "name": "Titan-Schalldämpfer",
+  "price": 3290,
+  "shop": "BMW Teileshop",
+  "url": "",
+  "note": "Blau angelaufene Titan-Endrohre, Original-Zubehör.",
+  "quote": "",
+  "visual": {
+    "rimStyle": "none",
+    "rimColor": "",
+    "rimMetal": null,
+    "rimRough": null,
+    "rimSize": null,
+    "caliper": "",
+    "drop": null,
+    "tips": "titan",
+    "lip": "none",
+    "spoiler": "none",
+    "intake": "none"
+  }
+}

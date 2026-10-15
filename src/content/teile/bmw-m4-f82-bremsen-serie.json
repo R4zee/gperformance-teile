@@ -1,0 +1,27 @@
+{
+  "title": "BMW M4 F82 – Serie M Compound Bremse, blau",
+  "vehicle": "bmw/m4/f82",
+  "category": "bremsen",
+  "order": 1,
+  "stock": true,
+  "brand": "Serie",
+  "name": "M Compound Bremse, blau",
+  "price": null,
+  "shop": "",
+  "url": "",
+  "note": "Serienbremse mit blau lackierten Sätteln.",
+  "quote": "",
+  "visual": {
+    "rimStyle": "none",
+    "rimColor": "",
+    "rimMetal": null,
+    "rimRough": null,
+    "rimSize": null,
+    "caliper": "#1f4fa3",
+    "drop": null,
+    "tips": "none",
+    "lip": "none",
+    "spoiler": "none",
+    "intake": "none"
+  }
+}

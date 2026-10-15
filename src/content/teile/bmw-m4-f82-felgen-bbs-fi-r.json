@@ -1,0 +1,24 @@
+{
+  "title": "BMW M4 F82 – BBS FI-R Platinum Black, 20\"",
+  "vehicle": "bmw/m4/f82",
+  "category": "felgen",
+  "order": 2,
+  "stock": false,
+  "brand": "BBS",
+  "name": "FI-R Platinum Black, 20\"",
+  "price": 7490,
+  "shop": "Felgenshop",
+  "note": "Einteilig geschmiedet, extrem leicht. 9,5 × 20 vorne, 10,5 × 20 hinten.",
+  "quote": "Für mich die beste Felge für den F82. Ultraleicht geschmiedet und die Optik füllt die Radhäuser perfekt.",
+  "visual": {
+    "rimStyle": "mesh",
+    "rimColor": "#1c1c1e",
+    "rimMetal": 0.5,
+    "rimRough": 0.45,
+    "rimSize": 0.26,
+    "tips": "none",
+    "lip": "none",
+    "spoiler": "none",
+    "intake": "none"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "title": "BMW M4 F82 – Maxton Design Frontlippe V.1, Schwarz glänzend",
+  "vehicle": "bmw/m4/f82",
+  "category": "front",
+  "order": 3,
+  "stock": false,
+  "brand": "Maxton Design",
+  "name": "Frontlippe V.1, Schwarz glänzend",
+  "price": 289,
+  "shop": "Amazon",
+  "url": "https://www.amazon.de/s?k=Maxton%20Design%20Frontlippe%20V.1%2C%20Schwarz%20gl%C3%A4nzend%20BMW%20M4%20F82",
+  "note": "ABS-Kunststoff, Klavierlack-Optik.",
+  "quote": "",
+  "visual": {
+    "rimStyle": "none",
+    "rimColor": "",
+    "rimMetal": null,
+    "rimRough": null,
+    "rimSize": null,
+    "caliper": "",
+    "drop": null,
+    "tips": "none",
+    "lip": "gloss",
+    "spoiler": "none",
+    "intake": "none"
+  }
+}

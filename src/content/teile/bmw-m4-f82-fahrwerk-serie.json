@@ -1,0 +1,27 @@
+{
+  "title": "BMW M4 F82 – Serie Adaptives M Fahrwerk",
+  "vehicle": "bmw/m4/f82",
+  "category": "fahrwerk",
+  "order": 1,
+  "stock": true,
+  "brand": "Serie",
+  "name": "Adaptives M Fahrwerk",
+  "price": null,
+  "shop": "",
+  "url": "",
+  "note": "Elektronisch geregelte Dämpfer.",
+  "quote": "",
+  "visual": {
+    "rimStyle": "none",
+    "rimColor": "",
+    "rimMetal": null,
+    "rimRough": null,
+    "rimSize": null,
+    "caliper": "",
+    "drop": 0,
+    "tips": "none",
+    "lip": "none",
+    "spoiler": "none",
+    "intake": "none"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "title": "BMW M4 F82 – Brembo GT Kit 6-Kolben, 380 mm",
+  "vehicle": "bmw/m4/f82",
+  "category": "bremsen",
+  "order": 2,
+  "stock": false,
+  "brand": "Brembo",
+  "name": "GT Kit 6-Kolben, 380 mm",
+  "price": 3690,
+  "shop": "eBay",
+  "url": "https://www.ebay.de/sch/i.html?_nkw=Brembo%20GT%20Kit%206-Kolben%2C%20380%20mm%20BMW%20M4%20F82",
+  "note": "Big-Brake-Kit mit Monoblock-Sätteln und geschlitzten Scheiben.",
+  "quote": "Brutaler Biss auf der Rennstrecke, im Alltag unauffällig. Das Upgrade, das ich jedem F82-Fahrer empfehle.",
+  "visual": {
+    "rimStyle": "none",
+    "rimColor": "",
+    "rimMetal": null,
+    "rimRough": null,
+    "rimSize": null,
+    "caliper": "#c41f1a",
+    "drop": null,
+    "tips": "none",
+    "lip": "none",
+    "spoiler": "none",
+    "intake": "none"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "title": "BMW M4 F82 – K&N Sportluftfilter Austausch",
+  "vehicle": "bmw/m4/f82",
+  "category": "motor",
+  "order": 4,
+  "stock": false,
+  "brand": "K&N",
+  "name": "Sportluftfilter Austausch",
+  "price": 79.9,
+  "shop": "Amazon",
+  "url": "https://www.amazon.de/s?k=K%26N%20Sportluftfilter%20Austausch%20BMW%20M4%20F82",
+  "note": "Waschbarer Tauschfilter für das Seriengehäuse.",
+  "quote": "",
+  "visual": {
+    "rimStyle": "none",
+    "rimColor": "",
+    "rimMetal": null,
+    "rimRough": null,
+    "rimSize": null,
+    "caliper": "",
+    "drop": null,
+    "tips": "none",
+    "lip": "none",
+    "spoiler": "none",
+    "intake": "none"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "title": "BMW M4 F82 – Foliatec Bremssattel-Lack Set, Racing Gelb",
+  "vehicle": "bmw/m4/f82",
+  "category": "bremsen",
+  "order": 4,
+  "stock": false,
+  "brand": "Foliatec",
+  "name": "Bremssattel-Lack Set, Racing Gelb",
+  "price": 32.95,
+  "shop": "Amazon",
+  "url": "https://www.amazon.de/s?k=Foliatec%20Bremssattel-Lack%20Set%2C%20Racing%20Gelb%20BMW%20M4%20F82",
+  "note": "Hitzebeständiger Lack für die Serien-Sättel.",
+  "quote": "",
+  "visual": {
+    "rimStyle": "none",
+    "rimColor": "",
+    "rimMetal": null,
+    "rimRough": null,
+    "rimSize": null,
+    "caliper": "#e3bd17",
+    "drop": null,
+    "tips": "none",
+    "lip": "none",
+    "spoiler": "none",
+    "intake": "none"
+  }
+}

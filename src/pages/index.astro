@@ -1,0 +1,63 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/home/Hero.tsx';
+import QuickPicker from '../components/home/QuickPicker.tsx';
+import { getHome, getMakes, getVehicles } from '../lib/catalog';
+import { carConfig, type Build } from '../lib/types';
+
+const [home, makes, vehicles] = await Promise.all([getHome(), getMakes(), getVehicles()]);
+const heroCat = vehicles.find(v => v.key === home.heroVehicle) || vehicles[0];
+const heroBuild: Build = {};
+for (const id of home.heroBuild) { const p = heroCat?.parts.find(x => x.id === id); if (p) heroBuild[p.cat] = p.id; }
+const brands = 'BBS · Brembo · KW · Akrapovič · Eventuri · H&R · OZ Racing · M Performance · Maxton · Wagner · ';
+const live = new Set(vehicles.map(v => v.key));
+---
+<Base>
+  <main style="flex:1">
+    {heroCat && <Hero client:load config={carConfig(heroCat, heroBuild)} model3d={heroCat.gen.model3d} title={home.heroTitle} href={`/${heroCat.key}/`} />}
+
+    <section class="sec sec-dark">
+      <div class="wrap" style="display:flex;flex-direction:column;gap:40px">
+        <div class="sec-head">
+          <h2 class="d-xl">Welches<br>Auto fährst du?</h2>
+          <a href="/fahrzeuge/" class="link-u" style="border-bottom:1px solid var(--acc);color:var(--acc)">Schritt für Schritt</a>
+        </div>
+        <QuickPicker client:visible makes={makes} />
+      </div>
+    </section>
+
+    <section id="beliebt" class="sec sec-light">
+      <div class="wrap" style="display:flex;flex-direction:column;gap:36px">
+        <div class="sec-head" style="gap:16px">
+          <h2 class="d-xl">Beliebte<br>Builds</h2>
+          <a href="/fahrzeuge/" class="link-u" style="border-bottom:1px solid var(--ink)">Alle Fahrzeuge</a>
+        </div>
+        <div class="pop-grid">
+          {home.popular.map(p => {
+            const ok = p.vehicle && live.has(p.vehicle);
+            const inner = (
+              <>
+                <div class="pop-img">Fahrzeugfoto</div>
+                <div class="pop-cap">
+                  <span class="meta">{p.meta}</span>
+                  <span class="name">{p.name}</span>
+                  <span class={ok ? 'cta' : 'cta soon'}>{ok ? 'Konfigurieren →' : 'Bald verfügbar'}</span>
+                </div>
+              </>
+            );
+            return ok ? <a href={`/${p.vehicle}/`} class="pop">{inner}</a> : <div class="pop">{inner}</div>;
+          })}
+        </div>
+      </div>
+    </section>
+
+    <section class="mq-sec">
+      <div class="mq" aria-hidden="true"><span>{brands}</span><span>{brands}</span></div>
+      <div class="usp">
+        <div><span class="n">01</span><h3>Handverlesen</h3><p>Nur Teile, die wir selbst fahren oder ohne Zögern empfehlen würden.</p></div>
+        <div><span class="n">02</span><h3>Passend zum Motor</h3><p>Gefiltert nach Marke, Modell, Generation und Motorisierung.</p></div>
+        <div><span class="n">03</span><h3>Transparent</h3><p>Affiliate-Links unterstützen den Kanal. Für dich ändert sich der Preis nicht.</p></div>
+      </div>
+    </section>
+  </main>
+</Base>

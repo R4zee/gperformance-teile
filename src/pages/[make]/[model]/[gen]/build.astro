@@ -1,0 +1,17 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import BuildSummary from '../../../../components/summary/BuildSummary.tsx';
+import { getVehicles } from '../../../../lib/catalog';
+import type { VehicleCatalog } from '../../../../lib/types';
+
+export async function getStaticPaths() {
+  return (await getVehicles()).map(v => {
+    const [make, model, gen] = v.key.split('/');
+    return { params: { make, model, gen }, props: { v } };
+  });
+}
+const { v } = Astro.props as { v: VehicleCatalog };
+---
+<Base title={`Dein Build: ${v.make.name} ${v.model.name} ${v.gen.name} – G Performance`}>
+  <main class="sum"><BuildSummary client:load cat={v} /></main>
+</Base>

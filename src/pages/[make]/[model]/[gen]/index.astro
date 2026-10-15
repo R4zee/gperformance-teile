@@ -1,0 +1,18 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Configurator from '../../../../components/config/Configurator.tsx';
+import { getVehicles } from '../../../../lib/catalog';
+import type { VehicleCatalog } from '../../../../lib/types';
+
+export async function getStaticPaths() {
+  return (await getVehicles()).map(v => {
+    const [make, model, gen] = v.key.split('/');
+    return { params: { make, model, gen }, props: { v } };
+  });
+}
+const { v } = Astro.props as { v: VehicleCatalog };
+const name = `${v.make.name} ${v.model.name} ${v.gen.name}`;
+---
+<Base title={`${name} Tuning-Teile in 3D – G Performance`} description={`Handverlesene Teile für den ${name}: Felgen, Bremsen, Fahrwerk, Abgasanlage und mehr – direkt am 3D-Modell ausprobieren.`} footer={false}>
+  <Configurator client:load cat={v} />
+</Base>

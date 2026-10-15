@@ -1,0 +1,27 @@
+{
+  "title": "BMW M4 F82 – Serie Frontschürze ohne Aufsatz",
+  "vehicle": "bmw/m4/f82",
+  "category": "front",
+  "order": 1,
+  "stock": true,
+  "brand": "Serie",
+  "name": "Frontschürze ohne Aufsatz",
+  "price": null,
+  "shop": "",
+  "url": "",
+  "note": "Serienzustand.",
+  "quote": "",
+  "visual": {
+    "rimStyle": "none",
+    "rimColor": "",
+    "rimMetal": null,
+    "rimRough": null,
+    "rimSize": null,
+    "caliper": "",
+    "drop": null,
+    "tips": "none",
+    "lip": "none",
+    "spoiler": "none",
+    "intake": "none"
+  }
+}

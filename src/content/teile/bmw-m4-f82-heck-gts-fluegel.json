@@ -1,0 +1,27 @@
+{
+  "title": "BMW M4 F82 – GTS-Style Heckflügel Carbon",
+  "vehicle": "bmw/m4/f82",
+  "category": "heck",
+  "order": 3,
+  "stock": false,
+  "brand": "GTS-Style",
+  "name": "Heckflügel Carbon",
+  "price": 1490,
+  "shop": "eBay",
+  "url": "https://www.ebay.de/sch/i.html?_nkw=GTS-Style%20Heckfl%C3%BCgel%20Carbon%20BMW%20M4%20F82",
+  "note": "Flügel im Stil des M4 GTS, mit Teilegutachten.",
+  "quote": "",
+  "visual": {
+    "rimStyle": "none",
+    "rimColor": "",
+    "rimMetal": null,
+    "rimRough": null,
+    "rimSize": null,
+    "caliper": "",
+    "drop": null,
+    "tips": "none",
+    "lip": "none",
+    "spoiler": "wing",
+    "intake": "none"
+  }
+}

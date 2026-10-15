@@ -1,0 +1,27 @@
+{
+  "title": "BMW M4 F82 – H&R Sportfedern, ca. 20 mm tiefer",
+  "vehicle": "bmw/m4/f82",
+  "category": "fahrwerk",
+  "order": 2,
+  "stock": false,
+  "brand": "H&R",
+  "name": "Sportfedern, ca. 20 mm tiefer",
+  "price": 289,
+  "shop": "Amazon",
+  "url": "https://www.amazon.de/s?k=H%26R%20Sportfedern%2C%20ca.%2020%20mm%20tiefer%20BMW%20M4%20F82",
+  "note": "Kompatibel mit dem Adaptiven M Fahrwerk. Mit Teilegutachten.",
+  "quote": "Günstigster Weg zum besseren Stand. Fährt sich mit dem Adaptiven Fahrwerk weiterhin komfortabel.",
+  "visual": {
+    "rimStyle": "none",
+    "rimColor": "",
+    "rimMetal": null,
+    "rimRough": null,
+    "rimSize": null,
+    "caliper": "",
+    "drop": 0.022,
+    "tips": "none",
+    "lip": "none",
+    "spoiler": "none",
+    "intake": "none"
+  }
+}

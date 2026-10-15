@@ -1,0 +1,11 @@
+---
+// Fallback für /go/<teil>/ – auf Cloudflare greift vorher die 302-Weiterleitung aus _redirects.
+import { getAllParts } from '../../lib/catalog';
+export async function getStaticPaths() {
+  return (await getAllParts()).filter(x => x.url).map(x => ({ params: { id: x.part.id }, props: { url: x.url } }));
+}
+const { url } = Astro.props as { url: string };
+---
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="robots" content="noindex,nofollow"><meta http-equiv="refresh" content={`0;url=${url}`}><title>Weiterleitung …</title></head>
+<body style="font-family:system-ui;background:#0a0a0b;color:#f5f5f3;padding:40px">Weiterleitung zum Shop … <a href={url} rel="sponsored nofollow" style="color:#ff3e9d">Hier klicken</a>, falls nichts passiert.</body></html>

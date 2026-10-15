@@ -1,0 +1,27 @@
+{
+  "title": "BMW M4 F82 – BMW M Performance Heckspoiler Carbon",
+  "vehicle": "bmw/m4/f82",
+  "category": "heck",
+  "order": 2,
+  "stock": false,
+  "brand": "BMW M Performance",
+  "name": "Heckspoiler Carbon",
+  "price": 690,
+  "shop": "BMW Teileshop",
+  "url": "",
+  "note": "Dezente Abrisskante in Sichtcarbon.",
+  "quote": "",
+  "visual": {
+    "rimStyle": "none",
+    "rimColor": "",
+    "rimMetal": null,
+    "rimRough": null,
+    "rimSize": null,
+    "caliper": "",
+    "drop": null,
+    "tips": "none",
+    "lip": "none",
+    "spoiler": "lip",
+    "intake": "none"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "title": "BMW M4 F82 – Akrapovič Slip-On Line Titan, Carbon-Endrohre",
+  "vehicle": "bmw/m4/f82",
+  "category": "abgas",
+  "order": 2,
+  "stock": false,
+  "brand": "Akrapovič",
+  "name": "Slip-On Line Titan, Carbon-Endrohre",
+  "price": 4190,
+  "shop": "eBay",
+  "url": "https://www.ebay.de/sch/i.html?_nkw=Akrapovi%C4%8D%20Slip-On%20Line%20Titan%2C%20Carbon-Endrohre%20BMW%20M4%20F82",
+  "note": "Titan-Schalldämpfer mit Klappensteuerung, rund 5 kg leichter.",
+  "quote": "Klingt, wie es aussieht. Die Carbon-Endrohre sind das Detail, auf das ich am häufigsten angesprochen werde.",
+  "visual": {
+    "rimStyle": "none",
+    "rimColor": "",
+    "rimMetal": null,
+    "rimRough": null,
+    "rimSize": null,
+    "caliper": "",
+    "drop": null,
+    "tips": "carbon",
+    "lip": "none",
+    "spoiler": "none",
+    "intake": "none"
+  }
+}

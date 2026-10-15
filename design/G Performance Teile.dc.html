@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>G Performance – Handverlesene Teile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0a0a0b;color:#f5f5f3;font-family:'Barlow',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+:root{--acc:#ff3e9d;--acc-ink:#c2185b}
+*{box-sizing:border-box}
+a{color:inherit;text-decoration:none}
+a:hover{color:var(--acc)}
+button,select{font-family:inherit}
+::-webkit-scrollbar{width:8px;height:6px}::-webkit-scrollbar-thumb{background:#3a3b3e}
+@keyframes gpUp{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:none}}
+@keyframes gpMq{to{transform:translateX(-50%)}}
+@keyframes gpBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+</style>
+</helmet>
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#0a0a0b"></rect><text x="100" y="128" text-anchor="middle" font-family="Impact,Arial Narrow,sans-serif" font-weight="800" font-size="78" fill="#ff3e9d">GP</text></svg></template>
+<div style="min-height:100vh;display:flex;flex-direction:column;background:#0a0a0b">
+
+<header style="position:fixed;top:0;left:0;right:0;height:64px;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 clamp(16px,3vw,40px);mix-blend-mode:difference;color:#fff">
+  <div style="display:flex;align-items:center;gap:32px;min-width:0">
+    <button onClick="{{ goHome }}" style="background:none;border:0;padding:0;cursor:pointer;position:relative;display:block;width:88px;height:64px;overflow:hidden">
+      <img src="assets/gp-logo.jpg" alt="G Performance" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-46%);height:112px;width:auto;filter:grayscale(1) contrast(2.4) brightness(1.3) invert(1);mix-blend-mode:screen">
+    </button>
+    <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+      <nav style="display:flex;gap:28px;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase">
+        <a href="#" onClick="{{ goSelect }}" style="color:#fff">Fahrzeuge</a>
+        <a href="#" onClick="{{ goPopular }}" style="color:#fff">Builds</a>
+        <a href="https://www.youtube.com/@GPerformance" target="_blank" rel="noopener" style="color:#fff">YouTube</a>
+      </nav>
+    </sc-if>
+  </div>
+  <div style="display:flex;align-items:center;gap:10px;min-width:0">
+    <sc-if value="{{ hasVehicle }}" hint-placeholder-val="{{ false }}">
+      <button onClick="{{ goSelect }}" style="display:flex;align-items:center;gap:10px;height:38px;padding:0 16px;border:1px solid rgba(255,255,255,.5);border-radius:999px;background:none;cursor:pointer;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#fff;min-width:0;white-space:nowrap;overflow:hidden">
+        <span style="overflow:hidden;text-overflow:ellipsis">{{ vehicleShort }}</span>
+      </button>
+    </sc-if>
+    <button onClick="{{ goSummary }}" style="height:38px;padding:0 18px;border:0;border-radius:999px;background:#fff;color:#000;cursor:pointer;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap">{{ buildBtnLabel }}</button>
+  </div>
+</header>
+
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+<main style="flex:1">
+
+  <section id="gp-hero" style="height:300vh;background:#f5f5f3;color:#0a0a0b;position:relative">
+    <div style="position:sticky;top:0;height:100vh;overflow:hidden;display:grid;place-items:center">
+      <div id="gp-hero-c" style="position:absolute;inset:0;opacity:0;pointer-events:none;will-change:transform,opacity">
+        <x-import component-from-global-scope="gp-car-stage" from="./car-stage.js" config="{{ heroConfig }}" zone="overview" hotspots="off" spin="0" style="position:absolute;inset:0;width:100%;height:100%" hint-size="100%,100%"></x-import>
+      </div>
+      <div id="gp-hero-t" style="position:relative;text-align:center;padding:0 20px;display:flex;flex-direction:column;align-items:center;gap:28px;will-change:transform,opacity;max-width:1100px">
+        <div style="font-size:12px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:#6e6e73;animation:gpUp .9s cubic-bezier(.2,.7,.2,1) both">G Performance</div>
+        <h1 style="margin:0;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(56px,min(13vw,17vh),200px);line-height:.86;letter-spacing:-.02em;text-transform:uppercase;text-wrap:balance">
+          <span style="display:block;animation:gpUp .9s .08s cubic-bezier(.2,.7,.2,1) both">Dein Auto.</span>
+          <span style="display:block;animation:gpUp .9s .18s cubic-bezier(.2,.7,.2,1) both">Deine Teile.</span>
+          <span style="display:block;color:var(--acc-ink);animation:gpUp .9s .28s cubic-bezier(.2,.7,.2,1) both">Handverlesen.</span>
+        </h1>
+        <p style="margin:0;max-width:520px;font-size:clamp(17px,1.6vw,21px);line-height:1.45;color:#3a3b3e;text-wrap:pretty;animation:gpUp .9s .4s cubic-bezier(.2,.7,.2,1) both">Jedes Teil in 3D direkt am Auto. Nur Shops, die wir selbst empfehlen.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;animation:gpUp .9s .5s cubic-bezier(.2,.7,.2,1) both">
+          <button onClick="{{ goSelect }}" style="height:52px;padding:0 28px;border:0;border-radius:999px;background:#0a0a0b;color:#fff;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer" style-hover="background:var(--acc);color:#0a0a0b">Fahrzeug wählen</button>
+          <button onClick="{{ goPopular }}" style="height:52px;padding:0 28px;border:1px solid #0a0a0b;border-radius:999px;background:none;color:#0a0a0b;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer" style-hover="background:#0a0a0b;color:#fff">Builds ansehen</button>
+        </div>
+      </div>
+      <div id="gp-hero-cap" style="position:absolute;left:0;right:0;bottom:40px;padding:0 clamp(20px,4vw,48px);display:flex;justify-content:space-between;align-items:flex-end;gap:16px;opacity:0;pointer-events:none;flex-wrap:wrap">
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <span style="font-size:11px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:#6e6e73">Build des Monats</span>
+          <span style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(36px,5vw,72px);line-height:.9;text-transform:uppercase;letter-spacing:-.01em">BMW M4 F82</span>
+        </div>
+        <button onClick="{{ goM4 }}" style="pointer-events:auto;height:52px;padding:0 28px;border:0;border-radius:999px;background:#0a0a0b;color:#fff;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer" style-hover="background:var(--acc);color:#0a0a0b">Diesen Build konfigurieren</button>
+      </div>
+      <div id="gp-hero-hint" style="position:absolute;left:50%;bottom:20px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;font-size:11px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:#8b8b90;pointer-events:none">
+        <span>Scrollen</span><span style="width:1px;height:28px;background:#8b8b90;animation:gpBounce 1.6s ease-in-out infinite"></span>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:#0a0a0b;color:#f5f5f3;color-scheme:dark;padding:clamp(72px,10vw,140px) clamp(20px,4vw,48px)">
+    <div style="max-width:1400px;margin:0 auto;display:flex;flex-direction:column;gap:40px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap">
+        <h2 style="margin:0;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(48px,8vw,128px);line-height:.88;text-transform:uppercase;letter-spacing:-.02em">Welches<br>Auto fährst du?</h2>
+        <button onClick="{{ goSelect }}" style="background:none;border:0;padding:0 0 4px;border-bottom:1px solid var(--acc);color:var(--acc);font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;cursor:pointer">Schritt für Schritt</button>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:0;border-top:1px solid rgba(255,255,255,.16)">
+        <label style="display:flex;flex-direction:column;gap:10px;padding:24px 20px 24px 0;border-bottom:1px solid rgba(255,255,255,.16)">
+          <span style="font-size:11px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:#8b8b90">01 Marke</span>
+          <select value="{{ selMake }}" onChange="{{ onMake }}" style="appearance:none;border:0;background:none;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:32px;line-height:1;text-transform:uppercase;padding:0;outline:none;cursor:pointer;color:#f5f5f3">
+            <option value="">Wählen</option>
+            <sc-for list="{{ makeOptions }}" as="o" hint-placeholder-count="3"><option value="{{ o.id }}" disabled="{{ o.soon }}">{{ o.label }}</option></sc-for>
+          </select>
+        </label>
+        <label style="display:flex;flex-direction:column;gap:10px;padding:24px 20px 24px 0;border-bottom:1px solid rgba(255,255,255,.16)">
+          <span style="font-size:11px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:#8b8b90">02 Modell</span>
+          <select value="{{ selModel }}" onChange="{{ onModel }}" disabled="{{ noModels }}" style="appearance:none;border:0;background:none;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:32px;line-height:1;text-transform:uppercase;padding:0;outline:none;cursor:pointer;color:#f5f5f3">
+            <option value="">Wählen</option>
+            <sc-for list="{{ modelOptions }}" as="o" hint-placeholder-count="0"><option value="{{ o.id }}" disabled="{{ o.soon }}">{{ o.label }}</option></sc-for>
+          </select>
+        </label>
+        <label style="display:flex;flex-direction:column;gap:10px;padding:24px 20px 24px 0;border-bottom:1px solid rgba(255,255,255,.16)">
+          <span style="font-size:11px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:#8b8b90">03 Generation</span>
+          <select value="{{ selGen }}" onChange="{{ onGen }}" disabled="{{ noGens }}" style="appearance:none;border:0;background:none;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:32px;line-height:1;text-transform:uppercase;padding:0;outline:none;cursor:pointer;color:#f5f5f3">
+            <option value="">Wählen</option>
+            <sc-for list="{{ genOptions }}" as="o" hint-placeholder-count="0"><option value="{{ o.id }}" disabled="{{ o.soon }}">{{ o.label }}</option></sc-for>
+          </select>
+        </label>
+        <label style="display:flex;flex-direction:column;gap:10px;padding:24px 20px 24px 0;border-bottom:1px solid rgba(255,255,255,.16)">
+          <span style="font-size:11px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:#8b8b90">04 Motor</span>
+          <select value="{{ selEngine }}" onChange="{{ onEngine }}" disabled="{{ noEngines }}" style="appearance:none;border:0;background:none;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:32px;line-height:1;text-transform:uppercase;padding:0;outline:none;cursor:pointer;color:#f5f5f3">
+            <option value="">Wählen</option>
+            <sc-for list="{{ engineOptions }}" as="o" hint-placeholder-count="0"><option value="{{ o.id }}">{{ o.label }}</option></sc-for>
+          </select>
+        </label>
+        <button onClick="{{ goConfigFromQuick }}" disabled="{{ quickDisabled }}" style="border:0;border-bottom:1px solid rgba(255,255,255,.16);background:var(--acc);color:#0a0a0b;font-size:14px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:24px;cursor:pointer;opacity:{{ quickOpacity }}">Teile anzeigen →</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="beliebt" style="background:#f5f5f3;color:#0a0a0b;padding:clamp(72px,10vw,140px) clamp(20px,4vw,48px)">
+    <div style="max-width:1400px;margin:0 auto;display:flex;flex-direction:column;gap:36px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap">
+        <h2 style="margin:0;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(48px,8vw,128px);line-height:.88;text-transform:uppercase;letter-spacing:-.02em">Beliebte<br>Builds</h2>
+        <a href="#" onClick="{{ goSelect }}" style="font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;border-bottom:1px solid #0a0a0b;padding-bottom:4px">Alle Fahrzeuge</a>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr));gap:16px">
+        <sc-for list="{{ popular }}" as="p" hint-placeholder-count="4">
+          <button onClick="{{ p.onClick }}" style="text-align:left;border:0;background:#e8e8e6;padding:0;cursor:{{ p.cursor }};display:flex;flex-direction:column;color:#0a0a0b;position:relative;overflow:hidden;border-radius:4px">
+            <div style="aspect-ratio:4/5;width:100%;background:linear-gradient(180deg,#e2e2e0,#cfcfcc);display:grid;place-items:start center;padding-top:28%;font-size:11px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:#8b8b90;transition:transform .6s cubic-bezier(.2,.7,.2,1)" style-hover="transform:scale(1.04)">Fahrzeugfoto</div>
+            <div style="position:absolute;left:0;right:0;bottom:0;padding:24px 20px;display:flex;flex-direction:column;gap:4px;background:linear-gradient(180deg,rgba(245,245,243,0),#f5f5f3 55%)">
+              <span style="font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#6e6e73">{{ p.meta }}</span>
+              <span style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:40px;line-height:.9;text-transform:uppercase">{{ p.name }}</span>
+              <span style="margin-top:10px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:{{ p.ctaColor }}">{{ p.cta }}</span>
+            </div>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:#0a0a0b;color:#f5f5f3;overflow:hidden;padding:clamp(72px,10vw,140px) 0">
+    <div style="display:flex;white-space:nowrap;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(56px,9vw,140px);line-height:1;text-transform:uppercase;letter-spacing:-.02em;color:#1e1f23;animation:gpMq 40s linear infinite;width:max-content">
+      <span style="padding-right:.4em">BBS · Brembo · KW · Akrapovič · Eventuri · H&amp;R · OZ Racing · M Performance · Maxton · Wagner · </span>
+      <span style="padding-right:.4em">BBS · Brembo · KW · Akrapovič · Eventuri · H&amp;R · OZ Racing · M Performance · Maxton · Wagner · </span>
+    </div>
+    <div style="max-width:1400px;margin:clamp(56px,8vw,112px) auto 0;padding:0 clamp(20px,4vw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:48px 40px">
+      <div style="display:flex;flex-direction:column;gap:16px;border-top:1px solid rgba(255,255,255,.16);padding-top:24px">
+        <span style="font-size:12px;font-weight:600;letter-spacing:.3em;color:var(--acc)">01</span>
+        <span style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(36px,4vw,56px);line-height:.9;text-transform:uppercase">Handverlesen</span>
+        <p style="margin:0;font-size:16px;line-height:1.55;color:#a7a7ab;max-width:360px">Nur Teile, die wir selbst fahren oder ohne Zögern empfehlen würden.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px;border-top:1px solid rgba(255,255,255,.16);padding-top:24px">
+        <span style="font-size:12px;font-weight:600;letter-spacing:.3em;color:var(--acc)">02</span>
+        <span style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(36px,4vw,56px);line-height:.9;text-transform:uppercase">Passend zum Motor</span>
+        <p style="margin:0;font-size:16px;line-height:1.55;color:#a7a7ab;max-width:360px">Gefiltert nach Marke, Modell, Generation und Motorisierung.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px;border-top:1px solid rgba(255,255,255,.16);padding-top:24px">
+        <span style="font-size:12px;font-weight:600;letter-spacing:.3em;color:var(--acc)">03</span>
+        <span style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(36px,4vw,56px);line-height:.9;text-transform:uppercase">Transparent</span>
+        <p style="margin:0;font-size:16px;line-height:1.55;color:#a7a7ab;max-width:360px">Affiliate-Links unterstützen den Kanal. Für dich ändert sich der Preis nicht.</p>
+      </div>
+    </div>
+  </section>
+</main>
+</sc-if>
+
+<sc-if value="{{ isSelect }}" hint-placeholder-val="{{ false }}">
+<main style="flex:1;background:#0a0a0b;color:#f5f5f3;padding-top:64px">
+  <div style="max-width:1400px;margin:0 auto;padding:clamp(32px,6vw,80px) clamp(20px,4vw,48px) 120px;display:flex;flex-direction:column;gap:40px">
+    <div style="display:flex;flex-wrap:wrap;gap:8px 28px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:clamp(18px,2vw,24px);text-transform:uppercase;letter-spacing:.02em">
+      <sc-for list="{{ steps }}" as="s" hint-placeholder-count="4">
+        <button onClick="{{ s.onClick }}" style="background:none;border:0;padding:0;cursor:pointer;display:flex;align-items:baseline;gap:10px;color:{{ s.valColor }};font:inherit;text-transform:inherit;letter-spacing:inherit;border-bottom:2px solid {{ s.line }};padding-bottom:4px">
+          <span style="font-family:'Barlow',sans-serif;font-size:11px;font-weight:600;letter-spacing:.3em;color:{{ s.numColor }}">{{ s.n }}</span><span>{{ s.value }}</span>
+        </button>
+      </sc-for>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap">
+      <h1 style="margin:0;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(56px,10vw,160px);line-height:.86;text-transform:uppercase;letter-spacing:-.02em;animation:gpUp .7s cubic-bezier(.2,.7,.2,1) both">{{ stepTitle }}</h1>
+      <sc-if value="{{ canStepBack }}" hint-placeholder-val="{{ false }}"><button onClick="{{ stepBack }}" style="background:none;border:0;padding:0 0 4px;border-bottom:1px solid #8b8b90;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#a7a7ab;cursor:pointer">← Zurück</button></sc-if>
+    </div>
+    <div style="display:flex;flex-direction:column;border-top:1px solid rgba(255,255,255,.16)">
+      <sc-for list="{{ tiles }}" as="t" hint-placeholder-count="8">
+        <button onClick="{{ t.onClick }}" disabled="{{ t.soon }}" style="text-align:left;border:0;border-bottom:1px solid rgba(255,255,255,.16);background:none;padding:clamp(18px,2.4vw,30px) 0;cursor:{{ t.cursor }};display:flex;align-items:baseline;justify-content:space-between;gap:24px;color:{{ t.nameColor }};transition:padding-left .35s cubic-bezier(.2,.7,.2,1),color .2s" style-hover="padding-left:{{ t.hoverPad }};color:{{ t.hoverColor }}">
+          <span style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(40px,6vw,96px);line-height:.9;text-transform:uppercase;letter-spacing:-.01em">{{ t.name }}</span>
+          <span style="font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#8b8b90;white-space:nowrap">{{ t.meta }}</span>
+        </button>
+      </sc-for>
+    </div>
+  </div>
+</main>
+</sc-if>
+
+<sc-if value="{{ isConfig }}" hint-placeholder-val="{{ false }}">
+<main style="flex:1;margin-top:64px;display:grid;grid-template-columns:{{ cfgCols }};grid-template-areas:{{ cfgAreas }};height:{{ cfgHeight }};min-height:0;background:#0a0a0b;color:#f5f5f3;color-scheme:dark">
+
+  <aside style="grid-area:side;display:flex;flex-direction:column;border-right:1px solid rgba(255,255,255,.1);min-height:0;min-width:0">
+    <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+      <div style="padding:24px 22px 20px;border-bottom:1px solid rgba(255,255,255,.1);display:flex;flex-direction:column;gap:8px">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:34px;line-height:.9;text-transform:uppercase">{{ vehicleTitle }}</div>
+        <div style="font-size:12px;line-height:1.5;color:#8b8b90;letter-spacing:.04em">{{ vehicleSub }}</div>
+        <button onClick="{{ goSelect }}" style="align-self:flex-start;margin-top:6px;background:none;border:0;padding:0 0 3px;font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--acc);cursor:pointer;border-bottom:1px solid var(--acc)">Wechseln</button>
+      </div>
+    </sc-if>
+    <nav style="display:flex;flex-direction:{{ catDir }};overflow-x:auto;overflow-y:{{ navOy }};flex:{{ navFlex }};scrollbar-width:none;min-height:0;border-bottom:{{ catBorder }};padding:{{ navPad }};gap:{{ navGap }}">
+      <sc-for list="{{ cats }}" as="c" hint-placeholder-count="7">
+        <button onClick="{{ c.onClick }}" style="flex:none;display:flex;align-items:center;gap:14px;text-align:left;border:0;border-radius:{{ c.radius }};padding:{{ c.pad }};background:{{ c.bg }};color:{{ c.fg }};cursor:pointer;white-space:nowrap;box-shadow:{{ c.bar }};transition:background .2s,color .2s" style-hover="color:#f5f5f3">
+          <span style="font-size:11px;font-weight:600;letter-spacing:.2em;color:{{ c.numColor }}">{{ c.idx }}</span>
+          <span style="display:flex;flex-direction:column;gap:2px;min-width:0;flex:1">
+            <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:{{ c.nameSize }};line-height:1;text-transform:uppercase;letter-spacing:.02em">{{ c.name }}</span>
+            <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}"><span style="font-size:12px;color:{{ c.subColor }};overflow:hidden;text-overflow:ellipsis;max-width:160px">{{ c.sub }}</span></sc-if>
+          </span>
+          <sc-if value="{{ c.changed }}" hint-placeholder-val="{{ false }}"><span style="width:6px;height:6px;border-radius:50%;background:var(--acc);flex:none"></span></sc-if>
+        </button>
+      </sc-for>
+    </nav>
+    <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+      <div style="padding:20px 22px;border-top:1px solid rgba(255,255,255,.1);display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline">
+          <span style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#8b8b90">{{ buildCountLabel }}</span>
+          <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:26px;line-height:1">{{ totalLabel }}</span>
+        </div>
+        <button onClick="{{ goSummary }}" style="height:48px;border:0;border-radius:999px;background:#f5f5f3;color:#0a0a0b;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer" style-hover="background:var(--acc)">Build ansehen</button>
+      </div>
+    </sc-if>
+  </aside>
+
+  <section style="grid-area:stage;position:relative;min-width:0;min-height:0;height:{{ stageHeight }};background:radial-gradient(ellipse 70% 60% at 50% 62%,#24262b 0%,#0a0a0b 70%);overflow:hidden">
+    <sc-if value="{{ is3d }}" hint-placeholder-val="{{ true }}">
+      <x-import component-from-global-scope="gp-car-stage" from="./car-stage.js" config="{{ carConfig }}" zone="{{ zone }}" hotspots="on" theme="dark" style="position:absolute;inset:0;width:100%;height:100%" hint-size="100%,100%"></x-import>
+      <div style="position:absolute;left:24px;top:22px;display:flex;flex-direction:column;gap:6px;pointer-events:none">
+        <span style="font-size:11px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--acc)">{{ activeCatIdx }} / 07</span>
+        <span style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(40px,5vw,80px);line-height:.86;text-transform:uppercase;letter-spacing:-.01em">{{ activeCatName }}</span>
+      </div>
+      <div style="position:absolute;left:24px;bottom:18px;font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#6e6e73;pointer-events:none">{{ stageHint }}</div>
+    </sc-if>
+    <sc-if value="{{ isList }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;inset:0;overflow:auto;padding:84px 24px 24px;background:#0a0a0b">
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin-bottom:20px;flex-wrap:wrap">
+          <h2 style="margin:0;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(36px,4vw,64px);line-height:.88;text-transform:uppercase">{{ activeCatName }}<br><span style="color:#8b8b90">{{ vehicleTitle }}</span></h2>
+          <label style="display:flex;align-items:center;gap:10px;font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#8b8b90">Sortieren
+            <select value="{{ sort }}" onChange="{{ onSort }}" style="height:36px;border:1px solid rgba(255,255,255,.2);border-radius:999px;background:none;padding:0 14px;font-size:12px;color:#f5f5f3;font-weight:600;letter-spacing:.06em">
+              <option value="pick">Empfehlung</option><option value="asc">Preis aufsteigend</option><option value="desc">Preis absteigend</option>
+            </select>
+          </label>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px">
+          <sc-for list="{{ listParts }}" as="p" hint-placeholder-count="4">
+            <button onClick="{{ p.onClick }}" style="text-align:left;border:0;background:#141517;border-radius:4px;padding:0;cursor:pointer;display:flex;flex-direction:column;color:#f5f5f3;outline:{{ p.outline }};outline-offset:-2px;overflow:hidden" style-hover="background:#1c1d21">
+              <div style="position:relative;aspect-ratio:4/3;width:100%;background:linear-gradient(180deg,#1f2024,#141517);display:grid;place-items:center;font-size:10px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:#55565a">
+                Produktbild
+                <sc-if value="{{ p.pick }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;left:10px;top:10px;background:var(--acc);color:#0a0a0b;font-size:10px;font-weight:700;letter-spacing:.12em;padding:6px 10px;border-radius:999px">G Pick</span></sc-if>
+              </div>
+              <div style="padding:16px 16px 18px;display:flex;flex-direction:column;gap:4px;width:100%">
+                <span style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#8b8b90">{{ p.brand }}</span>
+                <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:22px;line-height:1;text-transform:uppercase">{{ p.name }}</span>
+                <span style="margin-top:10px;display:flex;justify-content:space-between;gap:8px;font-size:13px"><span style="font-weight:600">{{ p.priceLabel }}</span><span style="color:#8b8b90">{{ p.shopLabel }}</span></span>
+              </div>
+            </button>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+    <div style="position:absolute;right:16px;top:16px;display:flex;gap:8px">
+      <sc-if value="{{ showOverviewBtn }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ toOverview }}" style="height:36px;padding:0 16px;border:1px solid rgba(255,255,255,.25);border-radius:999px;background:rgba(10,10,11,.6);backdrop-filter:blur(8px);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;color:#f5f5f3">Gesamtansicht</button>
+      </sc-if>
+      <div style="display:flex;border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:3px;background:rgba(10,10,11,.6);backdrop-filter:blur(8px)">
+        <button onClick="{{ set3d }}" style="height:30px;padding:0 16px;border:0;border-radius:999px;background:{{ tab3dBg }};color:{{ tab3dFg }};font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;cursor:pointer">3D</button>
+        <button onClick="{{ setList }}" style="height:30px;padding:0 16px;border:0;border-radius:999px;background:{{ tabListBg }};color:{{ tabListFg }};font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;cursor:pointer">Liste</button>
+      </div>
+    </div>
+  </section>
+
+  <aside style="grid-area:panel;border-left:1px solid rgba(255,255,255,.1);min-height:0;min-width:0;overflow:auto;background:#0a0a0b;padding-bottom:{{ panelPadBottom }}">
+    <sc-if value="{{ showPartList }}" hint-placeholder-val="{{ true }}">
+      <div style="padding:24px 22px 16px;display:flex;flex-direction:column;gap:6px;border-bottom:1px solid rgba(255,255,255,.1)">
+        <span style="font-size:11px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--acc)">{{ activeCatIdx }} — {{ activeCatName }}</span>
+        <span style="font-size:14px;color:#a7a7ab;line-height:1.4">{{ partCountLabel }}</span>
+      </div>
+      <div style="display:flex;flex-direction:column">
+        <sc-for list="{{ parts }}" as="p" hint-placeholder-count="4">
+          <button onClick="{{ p.onClick }}" style="display:grid;grid-template-columns:88px minmax(0,1fr);gap:16px;align-items:start;text-align:left;border:0;border-bottom:1px solid rgba(255,255,255,.08);padding:18px 22px;background:{{ p.bg }};cursor:pointer;color:#f5f5f3;box-shadow:{{ p.ring }};transition:background .2s" style-hover="background:#141517">
+            <div style="aspect-ratio:1;border-radius:4px;background:linear-gradient(180deg,#1f2024,#141517);display:grid;place-items:center;font-size:9px;font-weight:600;letter-spacing:.2em;color:#55565a">{{ p.thumbLabel }}</div>
+            <div style="display:flex;flex-direction:column;gap:4px;min-width:0">
+              <div style="display:flex;justify-content:space-between;gap:8px;align-items:baseline">
+                <span style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#8b8b90">{{ p.brand }}</span>
+                <sc-if value="{{ p.inBuild }}" hint-placeholder-val="{{ false }}"><span style="font-size:10px;font-weight:700;letter-spacing:.14em;color:var(--acc)">AM AUTO</span></sc-if>
+              </div>
+              <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:22px;line-height:1;text-transform:uppercase">{{ p.name }}</span>
+              <span style="margin-top:8px;display:flex;justify-content:space-between;gap:8px;font-size:13px"><span style="font-weight:600">{{ p.priceLabel }}</span><span style="color:#8b8b90">{{ p.shopLabel }}</span></span>
+              <sc-if value="{{ p.pick }}" hint-placeholder-val="{{ false }}"><span style="margin-top:10px;align-self:flex-start;background:var(--acc);color:#0a0a0b;font-size:10px;font-weight:700;letter-spacing:.12em;padding:5px 10px;border-radius:999px">G Pick</span></sc-if>
+            </div>
+          </button>
+        </sc-for>
+      </div>
+      <p style="margin:0;padding:18px 22px 28px;font-size:12px;line-height:1.5;color:#6e6e73">Klicke ein Teil, um es am Auto zu sehen. Preise inkl. MwSt., Stand {{ today }}.</p>
+    </sc-if>
+
+    <sc-if value="{{ showDetail }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 22px;border-bottom:1px solid rgba(255,255,255,.1)">
+          <button onClick="{{ closeDetail }}" style="background:none;border:0;padding:0;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#a7a7ab;cursor:pointer">← Alle {{ activeCatName }}</button>
+          <span style="font-size:11px;letter-spacing:.14em;color:#6e6e73">{{ detail.pos }}</span>
+        </div>
+        <div style="position:relative;aspect-ratio:16/10;background:linear-gradient(180deg,#1f2024,#141517);display:grid;place-items:center;font-size:10px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:#55565a">
+          Produktbild
+          <sc-if value="{{ detail.pick }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;left:14px;top:14px;background:var(--acc);color:#0a0a0b;font-size:10px;font-weight:700;letter-spacing:.12em;padding:6px 10px;border-radius:999px">G Performance Pick</span></sc-if>
+        </div>
+        <div style="padding:24px 22px;display:flex;flex-direction:column;gap:8px">
+          <span style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#8b8b90">{{ detail.brand }}</span>
+          <h3 style="margin:0;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:40px;line-height:.9;text-transform:uppercase;letter-spacing:-.01em;text-wrap:balance">{{ detail.name }}</h3>
+          <p style="margin:8px 0 0;font-size:15px;line-height:1.55;color:#a7a7ab">{{ detail.note }}</p>
+        </div>
+        <sc-if value="{{ detail.isOem }}" hint-placeholder-val="{{ false }}">
+          <div style="margin:0 22px 22px;padding:16px;background:#141517;border-radius:4px;font-size:14px;line-height:1.5;color:#a7a7ab">Serienausstattung deines Fahrzeugs. Wähle ein anderes Teil, um es am Auto zu vergleichen.</div>
+        </sc-if>
+        <sc-if value="{{ detail.hasOffer }}" hint-placeholder-val="{{ false }}">
+          <div style="margin:0 22px;display:flex;flex-direction:column;gap:12px">
+            <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:12px;padding:16px 0;border-top:1px solid rgba(255,255,255,.1);border-bottom:1px solid rgba(255,255,255,.1)">
+              <div style="display:flex;flex-direction:column;gap:4px">
+                <span style="font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#8b8b90">Empfohlener Shop</span>
+                <span style="font-size:16px;font-weight:600">{{ detail.shop }}</span>
+              </div>
+              <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:36px;line-height:.9">{{ detail.priceLabel }}</span>
+            </div>
+            <a href="{{ detail.url }}" target="_blank" rel="sponsored noopener" style="display:flex;justify-content:center;align-items:center;height:56px;border-radius:999px;background:var(--acc);color:#0a0a0b;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase" style-hover="background:#f5f5f3;color:#0a0a0b">Zum Angebot bei {{ detail.shop }}*</a>
+          </div>
+          <p style="margin:12px 22px 0;font-size:12px;line-height:1.5;color:#6e6e73">*Affiliate-Link. Kaufst du darüber, erhalten wir eine Provision. Für dich ändert sich der Preis nicht.</p>
+        </sc-if>
+        <sc-if value="{{ detail.pick }}" hint-placeholder-val="{{ false }}">
+          <div style="margin:28px 22px 0;padding:22px;background:#141517;border-radius:4px;display:flex;flex-direction:column;gap:14px">
+            <div style="display:flex;align-items:center;gap:12px">
+              <div style="width:40px;height:40px;border-radius:50%;background:#f5f5f3;overflow:hidden;display:grid;place-items:center;flex:none"><img src="assets/gp-logo.jpg" alt="" style="width:58px;filter:grayscale(1) contrast(2.4) brightness(1.3);mix-blend-mode:multiply"></div>
+              <div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:13px;font-weight:600">Notiz von G Performance</span><span style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#8b8b90">Warum dieses Teil</span></div>
+            </div>
+            <p style="margin:0;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:22px;line-height:1.15;color:#f5f5f3;text-wrap:pretty">„{{ detail.quote }}“</p>
+          </div>
+        </sc-if>
+        <dl style="margin:28px 22px 0;display:grid;grid-template-columns:auto minmax(0,1fr);border-top:1px solid rgba(255,255,255,.1);font-size:13px">
+          <sc-for list="{{ detail.specs }}" as="s" hint-placeholder-count="3">
+            <dt style="padding:12px 16px 12px 0;border-bottom:1px solid rgba(255,255,255,.08);color:#8b8b90">{{ s.k }}</dt>
+            <dd style="margin:0;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.08);text-align:right">{{ s.v }}</dd>
+          </sc-for>
+        </dl>
+        <sc-if value="{{ detail.canReset }}" hint-placeholder-val="{{ false }}">
+          <button onClick="{{ resetCat }}" style="margin:20px 22px 0;align-self:flex-start;background:none;border:0;padding:0 0 3px;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#a7a7ab;cursor:pointer;border-bottom:1px solid #55565a">Wieder auf Serie setzen</button>
+        </sc-if>
+        <div style="height:32px"></div>
+      </div>
+    </sc-if>
+  </aside>
+
+  <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;left:0;right:0;bottom:0;z-index:15;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:rgba(10,10,11,.85);backdrop-filter:blur(14px);border-top:1px solid rgba(255,255,255,.1)">
+      <div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#8b8b90">{{ buildCountLabel }}</span><span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:24px;line-height:1">{{ totalLabel }}</span></div>
+      <button onClick="{{ goSummary }}" style="height:46px;padding:0 22px;border:0;border-radius:999px;background:var(--acc);color:#0a0a0b;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer">Build ansehen</button>
+    </div>
+  </sc-if>
+</main>
+</sc-if>
+
+<sc-if value="{{ isSummary }}" hint-placeholder-val="{{ false }}">
+<main style="flex:1;background:#f5f5f3;color:#0a0a0b;padding-top:64px">
+  <div style="max-width:1400px;margin:0 auto;padding:clamp(32px,6vw,80px) clamp(20px,4vw,48px) 120px">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:40px">
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <span style="font-size:11px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:#6e6e73">Dein Build</span>
+        <h1 style="margin:0;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(56px,10vw,160px);line-height:.86;text-transform:uppercase;letter-spacing:-.02em;animation:gpUp .7s cubic-bezier(.2,.7,.2,1) both">{{ vehicleTitle }}</h1>
+        <span style="font-size:13px;letter-spacing:.06em;color:#6e6e73">{{ vehicleSub }}</span>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button onClick="{{ backToConfig }}" style="height:48px;padding:0 22px;border:1px solid #0a0a0b;border-radius:999px;background:none;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;color:#0a0a0b" style-hover="background:#0a0a0b;color:#fff">Weiter bearbeiten</button>
+        <button onClick="{{ copyLink }}" style="height:48px;padding:0 22px;border:0;border-radius:999px;background:#0a0a0b;color:#fff;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer" style-hover="background:var(--acc);color:#0a0a0b">{{ copyLabel }}</button>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:48px;align-items:start">
+      <div style="position:relative;aspect-ratio:16/11;background:radial-gradient(ellipse 70% 60% at 50% 62%,#ffffff 0%,#e6e6e3 70%);border-radius:4px;overflow:hidden">
+        <x-import component-from-global-scope="gp-car-stage" from="./car-stage.js" config="{{ carConfig }}" zone="overview" hotspots="off" autorotate="on" style="position:absolute;inset:0;width:100%;height:100%" hint-size="100%,100%"></x-import>
+      </div>
+      <div style="display:flex;flex-direction:column">
+        <sc-for list="{{ summaryRows }}" as="r" hint-placeholder-count="7">
+          <div style="display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:14px;align-items:center;padding:18px 0;border-bottom:1px solid rgba(10,10,11,.14)">
+            <span style="font-size:11px;font-weight:600;letter-spacing:.14em;color:#8b8b90">{{ r.idx }}</span>
+            <div style="display:flex;flex-direction:column;gap:3px;min-width:0">
+              <span style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#6e6e73">{{ r.cat }}</span>
+              <span style="font-family:'Barlow Condensed',sans-serif;font-weight:{{ r.weight }};font-size:22px;line-height:1;text-transform:uppercase;color:{{ r.color }}">{{ r.label }}</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:16px">
+              <span style="font-weight:600;font-size:14px">{{ r.priceLabel }}</span>
+              <sc-if value="{{ r.hasOffer }}" hint-placeholder-val="{{ false }}">
+                <a href="{{ r.url }}" target="_blank" rel="sponsored noopener" style="height:36px;display:flex;align-items:center;padding:0 16px;border:1px solid #0a0a0b;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap" style-hover="background:#0a0a0b;color:#fff">{{ r.shop }}*</a>
+              </sc-if>
+            </div>
+          </div>
+        </sc-for>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;padding:24px 0 0">
+          <span style="font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase">Gesamt · {{ buildCountLabel }}</span>
+          <span style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:48px;line-height:.9">{{ totalLabel }}</span>
+        </div>
+        <p style="margin:18px 0 0;font-size:12px;line-height:1.5;color:#6e6e73">*Affiliate-Links. Kaufst du darüber, erhalten wir eine Provision. Für dich ändert sich der Preis nicht. Preise inkl. MwSt., Stand {{ today }}. Montage und Eintragung nicht enthalten.</p>
+      </div>
+    </div>
+  </div>
+</main>
+</sc-if>
+
+<sc-if value="{{ showFooter }}" hint-placeholder-val="{{ true }}">
+<footer style="background:#0a0a0b;color:#8b8b90;border-top:1px solid rgba(255,255,255,.1)">
+  <div style="max-width:1400px;margin:0 auto;padding:32px clamp(20px,4vw,48px);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:12px;letter-spacing:.1em;text-transform:uppercase">
+    <span>© 2026 G Performance</span>
+    <div style="display:flex;gap:24px;flex-wrap:wrap"><a href="#" style="color:#8b8b90">Impressum</a><a href="#" style="color:#8b8b90">Datenschutz</a><a href="#" style="color:#8b8b90">Affiliate-Hinweis</a></div>
+  </div>
+</footer>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;accent&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;pink&quot;,&quot;options&quot;:[&quot;teal&quot;,&quot;pink&quot;,&quot;orange&quot;,&quot;lime&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Farben&quot;},&quot;paint&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;yasmarina&quot;,&quot;options&quot;:[&quot;yasmarina&quot;,&quot;austin&quot;,&quot;sapphire&quot;,&quot;alpine&quot;,&quot;mineral&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;3D-Fahrzeug&quot;}}">
+const MAKES = [
+  { id: 'bmw', name: 'BMW', models: [
+    { id: 'm2', name: 'M2', soon: true, meta: 'F87 · G87' },
+    { id: 'm3', name: 'M3', soon: true, meta: 'F80 · G80' },
+    { id: 'm4', name: 'M4', meta: 'F82 · G82', gens: [
+      { id: 'f82', name: 'F82', meta: 'Coupé · 2014 – 2020', engines: [
+        { id: 's55', name: '3.0 Biturbo (S55)', ps: '431 PS' },
+        { id: 's55c', name: '3.0 Biturbo Competition', ps: '450 PS' },
+        { id: 's55cs', name: '3.0 Biturbo CS', ps: '460 PS' },
+        { id: 's55gts', name: '3.0 Biturbo GTS', ps: '500 PS' } ] },
+      { id: 'g82', name: 'G82', meta: 'Coupé · seit 2021', soon: true } ] },
+    { id: 'm5', name: 'M5', soon: true, meta: 'F90' },
+    { id: '1er', name: '1er', soon: true, meta: 'F40' } ] },
+  { id: 'audi', name: 'Audi', soon: true }, { id: 'vw', name: 'Volkswagen', soon: true },
+  { id: 'amg', name: 'Mercedes-AMG', soon: true }, { id: 'porsche', name: 'Porsche', soon: true },
+  { id: 'cupra', name: 'Cupra', soon: true }, { id: 'toyota', name: 'Toyota', soon: true }, { id: 'ford', name: 'Ford', soon: true }
+];
+const CATS = [
+  { id: 'felgen', name: 'Felgen' }, { id: 'bremsen', name: 'Bremsen' }, { id: 'fahrwerk', name: 'Fahrwerk' },
+  { id: 'abgas', name: 'Abgasanlage' }, { id: 'front', name: 'Frontlippe' }, { id: 'heck', name: 'Heckspoiler' }, { id: 'motor', name: 'Ansaugung' }
+];
+const P = (cat, id, brand, name, price, shop, note, vis, quote) => ({ cat, id, brand, name, price, shop, note, vis, quote, pick: !!quote });
+const PARTS = [
+  P('felgen', 'f-serie', 'Serie', 'M Doppelspeiche 437M, 19"', null, null, 'Geschmiedete Serienfelge in Ferricgrau.', { rim: { style: 'double', color: '#c3c5c8', r: 0.245 } }),
+  P('felgen', 'f-bbs', 'BBS', 'FI-R Platinum Black, 20"', 7490, 'Felgenshop', 'Einteilig geschmiedet, extrem leicht. 9,5 × 20 vorne, 10,5 × 20 hinten.', { rim: { style: 'mesh', color: '#1c1c1e', metal: 0.5, rough: 0.45, r: 0.26 } }, 'Für mich die beste Felge für den F82. Ultraleicht geschmiedet und die Optik füllt die Radhäuser perfekt.'),
+  P('felgen', 'f-666m', 'BMW M Performance', 'Schmiederad Y-Speiche 666M, 20"', 4890, 'BMW Teileshop', 'Original-Zubehör in Mattschwarz mit voller Garantie.', { rim: { style: 'y', color: '#222326', metal: 0.4, rough: 0.55, r: 0.26 } }),
+  P('felgen', 'f-oz', 'OZ Racing', 'Ultraleggera HLT, 20", Bronze', 2990, 'Amazon', 'Flowforming-Felge, bewährter Klassiker in Bronze.', { rim: { style: 'thin12', color: '#8c6b3f', metal: 0.8, rough: 0.35, r: 0.26 } }),
+  P('bremsen', 'b-serie', 'Serie', 'M Compound Bremse, blau', null, null, 'Serienbremse mit blau lackierten Sätteln.', { caliper: '#1f4fa3' }),
+  P('bremsen', 'b-brembo', 'Brembo', 'GT Kit 6-Kolben, 380 mm', 3690, 'eBay', 'Big-Brake-Kit mit Monoblock-Sätteln und geschlitzten Scheiben.', { caliper: '#c41f1a' }, 'Brutaler Biss auf der Rennstrecke, im Alltag unauffällig. Das Upgrade, das ich jedem F82-Fahrer empfehle.'),
+  P('bremsen', 'b-ccb', 'BMW M', 'Carbon-Keramik-Bremse, gold', 8950, 'BMW Teileshop', 'Kaum Fading, deutlich weniger ungefederte Masse.', { caliper: '#c79a2c' }),
+  P('bremsen', 'b-lack', 'Foliatec', 'Bremssattel-Lack Set, Racing Gelb', 32.95, 'Amazon', 'Hitzebeständiger Lack für die Serien-Sättel.', { caliper: '#e3bd17' }),
+  P('fahrwerk', 's-serie', 'Serie', 'Adaptives M Fahrwerk', null, null, 'Elektronisch geregelte Dämpfer.', { drop: 0 }),
+  P('fahrwerk', 's-hr', 'H&R', 'Sportfedern, ca. 20 mm tiefer', 289, 'Amazon', 'Kompatibel mit dem Adaptiven M Fahrwerk. Mit Teilegutachten.', { drop: 0.022 }, 'Günstigster Weg zum besseren Stand. Fährt sich mit dem Adaptiven Fahrwerk weiterhin komfortabel.'),
+  P('fahrwerk', 's-kw', 'KW', 'Gewindefahrwerk Variante 3', 2649, 'Tuning-Shop', 'Höhe, Zug- und Druckstufe getrennt einstellbar.', { drop: 0.045 }),
+  P('abgas', 'e-serie', 'Serie', 'M Abgasanlage mit Klappe', null, null, 'Vier verchromte Endrohre.', { tips: 'chrome' }),
+  P('abgas', 'e-akra', 'Akrapovič', 'Slip-On Line Titan, Carbon-Endrohre', 4190, 'eBay', 'Titan-Schalldämpfer mit Klappensteuerung, rund 5 kg leichter.', { tips: 'carbon' }, 'Klingt, wie es aussieht. Die Carbon-Endrohre sind das Detail, auf das ich am häufigsten angesprochen werde.'),
+  P('abgas', 'e-mp', 'BMW M Performance', 'Titan-Schalldämpfer', 3290, 'BMW Teileshop', 'Blau angelaufene Titan-Endrohre, Original-Zubehör.', { tips: 'titan' }),
+  P('front', 'l-serie', 'Serie', 'Frontschürze ohne Aufsatz', null, null, 'Serienzustand.', { lip: null }),
+  P('front', 'l-mp', 'BMW M Performance', 'Frontaufsatz Carbon', 1190, 'BMW Teileshop', 'Sichtcarbon, Original-Passform.', { lip: 'carbon' }, 'Original-Passform und echte Sichtcarbon-Qualität. Kein Nachbessern nötig.'),
+  P('front', 'l-max', 'Maxton Design', 'Frontlippe V.1, Schwarz glänzend', 289, 'Amazon', 'ABS-Kunststoff, Klavierlack-Optik.', { lip: 'gloss' }),
+  P('heck', 'r-serie', 'Serie', 'Heckklappe ohne Spoiler', null, null, 'Serienzustand.', { spoiler: null }),
+  P('heck', 'r-mp', 'BMW M Performance', 'Heckspoiler Carbon', 690, 'BMW Teileshop', 'Dezente Abrisskante in Sichtcarbon.', { spoiler: 'lip' }),
+  P('heck', 'r-gts', 'GTS-Style', 'Heckflügel Carbon', 1490, 'eBay', 'Flügel im Stil des M4 GTS, mit Teilegutachten.', { spoiler: 'wing' }),
+  P('motor', 'i-serie', 'Serie', 'Original-Ansaugsystem', null, null, 'Serienzustand.', { intake: null }),
+  P('motor', 'i-eventuri', 'Eventuri', 'Carbon-Ansaugsystem S55', 1890, 'Tuning-Shop', 'Geschlossenes Carbon-Gehäuse mit Venturi-Einlass.', { intake: 'carbon' }, 'Sieht unter der Haube unfassbar aus, und der Turbo-Sound ist ab dem ersten Meter da.'),
+  P('motor', 'i-wagner', 'Wagner Tuning', 'Competition Ladeluftkühler', 1349, 'eBay', 'Größerer Kern für stabile Ladelufttemperaturen.', { intake: null }),
+  P('motor', 'i-kn', 'K&N', 'Sportluftfilter Austausch', 79.9, 'Amazon', 'Waschbarer Tauschfilter für das Seriengehäuse.', { intake: null })
+];
+const DEFAULT_BUILD = Object.fromEntries(CATS.map(c => [c.id, PARTS.find(p => p.cat === c.id).id]));
+const PAINTS = { yasmarina: '#1f5fa8', austin: '#d9a300', sapphire: '#121417', alpine: '#e9eaea', mineral: '#5b6066' };
+const eur = n => n == null ? 'Serie' : new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR', maximumFractionDigits: n % 1 ? 2 : 0, minimumFractionDigits: n % 1 ? 2 : 0 }).format(n);
+const KEY = 'gp-proto-v1';
+const ACCENTS = { teal: '#00e0c6', pink: '#ff3e9d', orange: '#ff5c1a', lime: '#c6ff3e' };
+const ACCENT_INK = { teal: '#007a6c', pink: '#c2185b', orange: '#c2410c', lime: '#4d7c0f' };
+const INK = '#0a0a0b', PAPER = '#f5f5f3', ACC = 'var(--acc)', MUTE = '#8b8b90';
+const clamp01 = v => Math.min(1, Math.max(0, v));
+const FULL = { make: 'bmw', model: 'm4', gen: 'f82', engine: 's55' };
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    let saved = {};
+    try { saved = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) {}
+    const q = new URLSearchParams(location.search);
+    let build = { ...DEFAULT_BUILD, ...(saved.build || {}) };
+    const h = location.hash.match(/build=([\w,-]+)/);
+    if (h) h[1].split(',').forEach(id => { const p = PARTS.find(x => x.id === id); if (p) build[p.cat] = id; });
+    this.state = {
+      screen: q.get('screen') || (h ? 'summary' : saved.screen) || 'home',
+      sel: saved.sel || { make: '', model: '', gen: '', engine: '' },
+      step: 0, build, cat: q.get('cat') || saved.cat || 'felgen', zone: 'overview',
+      detail: null, view: q.get('view') || 'v3d', sort: 'pick', w: window.innerWidth, copied: false
+    };
+    if (h || (q.get('screen') && !['home', 'select'].includes(q.get('screen')))) this.state.sel = FULL;
+  }
+  componentDidMount() {
+    this._r = () => { this.setState({ w: window.innerWidth }); this._hero(); }; window.addEventListener('resize', this._r);
+    this._z = e => this.pickCat(e.detail.zone, true); document.addEventListener('gp-zone', this._z);
+    this._sc = () => { if (document.hidden) return this._hero(); if (this._sraf) return; this._sraf = requestAnimationFrame(() => { this._sraf = 0; this._hero(); }); };
+    window.addEventListener('scroll', this._sc, { passive: true });
+    this._hero();
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this._r); document.removeEventListener('gp-zone', this._z); window.removeEventListener('scroll', this._sc); }
+  componentDidUpdate() {
+    const { screen, sel, build, cat } = this.state;
+    try { localStorage.setItem(KEY, JSON.stringify({ screen, sel, build, cat })); } catch (e) {}
+    this._hero();
+  }
+  // scroll-driven hero: headline recedes, car fades in and spins with scroll
+  _hero() {
+    const h = document.getElementById('gp-hero'); if (!h) return;
+    const t = document.getElementById('gp-hero-t'), c = document.getElementById('gp-hero-c'), cap = document.getElementById('gp-hero-cap'), hint = document.getElementById('gp-hero-hint');
+    if (!t || !c || !cap) return;
+    const total = h.offsetHeight - window.innerHeight, p = clamp01(-h.getBoundingClientRect().top / Math.max(1, total));
+    const f = clamp01((p - 0.12) / 0.22), g = clamp01((p - 0.22) / 0.3), k = clamp01((p - 0.62) / 0.25);
+    t.style.opacity = 1 - f; t.style.transform = `translateY(${-f * 80}px) scale(${1 - f * 0.12})`; t.style.pointerEvents = f > 0.5 ? 'none' : 'auto';
+    c.style.opacity = g; c.style.transform = `scale(${0.78 + g * 0.22}) translateY(${(1 - g) * 60}px)`;
+    cap.style.opacity = k; cap.style.transform = `translateY(${(1 - k) * 24}px)`;
+    if (hint) { const near = t.getBoundingClientRect().bottom > window.innerHeight - 90; hint.style.opacity = near ? 0 : 1 - clamp01(p / 0.1); }
+    const car = c.querySelector('gp-car-stage'); if (car) car.setAttribute('spin', (clamp01((p - 0.25) / 0.75) * Math.PI * 1.15).toFixed(3));
+  }
+  go(screen) { this.setState({ screen, detail: null }); window.scrollTo(0, 0); }
+  pickCat(cat, fromCar) { this.setState({ cat, zone: cat, detail: null, view: fromCar ? 'v3d' : this.state.view }); }
+  choosePart(p) { this.setState(s => ({ build: { ...s.build, [p.cat]: p.id }, detail: p.id, zone: p.cat })); }
+  url(p) {
+    const k = encodeURIComponent(`${p.brand} ${p.name} BMW M4 F82`);
+    if (p.shop === 'Amazon') return `https://www.amazon.de/s?k=${k}&tag=gperformance-21`;
+    if (p.shop === 'eBay') return `https://www.ebay.de/sch/i.html?_nkw=${k}&mkcid=1&campid=0000000000`;
+    return `#affiliate-${p.id}`;
+  }
+  tree() {
+    const { sel } = this.state;
+    const make = MAKES.find(m => m.id === sel.make), model = make && (make.models || []).find(m => m.id === sel.model);
+    const gen = model && (model.gens || []).find(g => g.id === sel.gen), engine = gen && (gen.engines || []).find(e => e.id === sel.engine);
+    return { make, model, gen, engine };
+  }
+  carCfg(build) {
+    const v = {}; CATS.forEach(c => Object.assign(v, PARTS.find(p => p.id === build[c.id]).vis));
+    v.paint = PAINTS[this.props.paint] || PAINTS.yasmarina; return JSON.stringify(v);
+  }
+
+  syncAccent() {
+    const a = ACCENTS[this.props.accent] || ACCENTS.pink;
+    document.documentElement.style.setProperty('--acc', a);
+    document.documentElement.style.setProperty('--acc-ink', ACCENT_INK[this.props.accent] || ACCENT_INK.pink);
+    document.querySelectorAll('gp-car-stage').forEach(el => el.setAttribute('accent', a));
+  }
+  renderVals() {
+    this.syncAccent();
+    const s = this.state, isMobile = s.w < 900, isDesktop = !isMobile;
+    const { make, model, gen, engine } = this.tree();
+    const hasVehicle = !!engine;
+    const vehicleTitle = model ? `${make.name} ${model.name} ${gen ? gen.name : ''}`.trim() : 'BMW M4 F82';
+    const vehicleSub = gen && engine ? `${gen.meta} · ${engine.name} · ${engine.ps}` : '';
+    const setSel = patch => this.setState(st => ({ sel: { ...st.sel, ...patch } }));
+    const chosen = PARTS.filter(p => p.price != null && s.build[p.cat] === p.id);
+    const total = chosen.reduce((a, p) => a + p.price, 0);
+    const buildCountLabel = chosen.length === 1 ? '1 Teil' : `${chosen.length} Teile`;
+    const totalLabel = eur(total || 0).replace('Serie', '0 €');
+
+    const stepDefs = [
+      { label: 'Marke', value: make && make.name, list: MAKES.map(m => ({ id: m.id, name: m.name, meta: m.soon ? 'Bald verfügbar' : `${m.models.length} Modelle`, soon: m.soon })), key: 'make' },
+      { label: 'Modell', value: model && model.name, list: make ? (make.models || []).map(m => ({ id: m.id, name: m.name, meta: m.soon ? 'Bald verfügbar' : m.meta, soon: m.soon })) : [], key: 'model' },
+      { label: 'Generation', value: gen && gen.name, list: model ? (model.gens || []).map(g => ({ id: g.id, name: g.name, meta: g.soon ? 'Bald verfügbar' : g.meta, soon: g.soon })) : [], key: 'gen' },
+      { label: 'Motor', value: engine && engine.name, list: gen ? (gen.engines || []).map(e => ({ id: e.id, name: e.ps, meta: e.name })) : [], key: 'engine' }
+    ];
+    const keys = ['make', 'model', 'gen', 'engine'];
+    const steps = stepDefs.map((d, i) => ({
+      n: '0' + (i + 1), label: d.label, value: d.value || d.label,
+      line: i === s.step ? ACC : 'transparent', numColor: i === s.step ? ACC : '#55565a', valColor: i === s.step ? PAPER : d.value ? '#a7a7ab' : '#55565a',
+      onClick: () => { if (i === 0 || stepDefs[i - 1].value) this.setState({ step: i }); }
+    }));
+    const cur = stepDefs[s.step];
+    const tiles = cur.list.map(t => ({
+      ...t, cursor: t.soon ? 'default' : 'pointer', nameColor: t.soon ? '#3a3b3e' : PAPER, hoverPad: t.soon ? '0' : '24px', hoverColor: t.soon ? '#3a3b3e' : ACC,
+      onClick: () => {
+        if (t.soon) return;
+        const patch = { [cur.key]: t.id }; keys.slice(s.step + 1).forEach(k => (patch[k] = ''));
+        if (s.step < 3) this.setState(st => ({ sel: { ...st.sel, ...patch }, step: st.step + 1 }));
+        else this.setState(st => ({ sel: { ...st.sel, ...patch }, screen: 'config', zone: 'overview', detail: null }));
+      }
+    }));
+
+    const activeCat = CATS.find(c => c.id === s.cat) || CATS[0];
+    const catIdx = CATS.indexOf(activeCat);
+    const cats = CATS.map((c, i) => {
+      const p = PARTS.find(x => x.id === s.build[c.id]), active = c.id === activeCat.id;
+      return { idx: '0' + (i + 1), name: c.name, sub: p.price == null ? 'Serie' : p.brand, changed: p.price != null,
+        bg: active ? (isDesktop ? '#141517' : PAPER) : 'transparent', fg: active ? (isDesktop ? PAPER : INK) : MUTE,
+        numColor: active ? ACC : '#55565a', subColor: active ? '#a7a7ab' : '#55565a',
+        bar: active && isDesktop ? `inset 3px 0 0 ${ACC}` : 'none',
+        radius: isDesktop ? '0' : '999px', pad: isDesktop ? '16px 22px' : '10px 16px', nameSize: isDesktop ? '20px' : '16px',
+        onClick: () => this.pickCat(c.id) };
+    });
+    const catParts = PARTS.filter(p => p.cat === activeCat.id);
+    const mk = p => {
+      const inBuild = s.build[p.cat] === p.id;
+      return { ...p, inBuild, priceLabel: p.price == null ? 'Serie' : eur(p.price), shopLabel: p.shop || 'Serienausstattung',
+        thumbLabel: p.price == null ? 'SERIE' : 'BILD', bg: inBuild ? '#111214' : 'transparent', ring: inBuild ? `inset 3px 0 0 ${ACC}` : 'none',
+        outline: s.detail === p.id ? `2px solid ${ACC}` : 'none', onClick: () => this.choosePart(p) };
+    };
+    const parts = catParts.map(mk);
+    let lp = catParts.slice();
+    if (s.sort === 'asc') lp.sort((a, b) => (a.price || 0) - (b.price || 0));
+    if (s.sort === 'desc') lp.sort((a, b) => (b.price || 0) - (a.price || 0));
+    if (s.sort === 'pick') lp.sort((a, b) => (b.pick - a.pick));
+    const listParts = lp.map(mk);
+    const dp = PARTS.find(p => p.id === s.detail);
+    const detail = dp ? {
+      ...dp, isOem: dp.price == null, hasOffer: dp.price != null, priceLabel: eur(dp.price), url: this.url(dp),
+      pos: `${catParts.indexOf(dp) + 1} / ${catParts.length}`, canReset: dp.price != null && s.build[dp.cat] === dp.id,
+      specs: [{ k: 'Passend für', v: `${vehicleTitle} · ${engine ? engine.ps : '431 PS'}` }, { k: 'Hersteller', v: dp.brand === 'Serie' ? 'BMW' : dp.brand }, { k: 'Kategorie', v: activeCat.name }].concat(dp.shop ? [{ k: 'Shop', v: dp.shop }] : [])
+    } : { specs: [] };
+    const showDetail = !!dp || s.view === 'vlist';
+    if (s.view === 'vlist' && !dp) {
+      const f = listParts[0]; Object.assign(detail, { ...f, isOem: f.price == null, hasOffer: f.price != null, priceLabel: eur(f.price), url: this.url(f), pos: '', canReset: false,
+        specs: [{ k: 'Passend für', v: vehicleTitle }, { k: 'Hersteller', v: f.brand }] });
+    }
+    const summaryRows = CATS.map((c, i) => {
+      const p = PARTS.find(x => x.id === s.build[c.id]), oem = p.price == null;
+      return { idx: '0' + (i + 1), cat: c.name, label: oem ? 'Serie' : `${p.brand} ${p.name}`, weight: oem ? 600 : 800, color: oem ? MUTE : INK,
+        priceLabel: oem ? '—' : eur(p.price), hasOffer: !oem, shop: p.shop, url: this.url(p) };
+    });
+    const opt = arr => (arr || []).map(x => ({ id: x.id, label: x.soon ? `${x.name} (bald)` : x.name, soon: !!x.soon }));
+    const heroBuild = { felgen: 'f-bbs', bremsen: 'b-brembo', fahrwerk: 's-kw', abgas: 'e-akra', front: 'l-mp', heck: 'r-mp', motor: 'i-eventuri' };
+    const toM4 = () => this.setState({ sel: FULL, screen: 'config', zone: 'overview', detail: null }, () => window.scrollTo(0, 0));
+
+    return {
+      isMobile, isDesktop, hasVehicle,
+      isHome: s.screen === 'home', isSelect: s.screen === 'select', isConfig: s.screen === 'config', isSummary: s.screen === 'summary',
+      showFooter: s.screen !== 'config',
+      vehicleShort: hasVehicle ? `${make.name} ${model.name} ${gen.name} · ${engine.ps}` : '',
+      vehicleTitle, vehicleSub,
+      buildBtnLabel: chosen.length ? `Build (${chosen.length})` : 'Build',
+      goHome: () => this.go('home'),
+      goSelect: e => { e && e.preventDefault && e.preventDefault(); this.setState({ step: hasVehicle ? 3 : make ? (model ? 2 : 1) : 0 }); this.go('select'); },
+      goPopular: e => { e && e.preventDefault && e.preventDefault(); this.go('home'); setTimeout(() => { const el = document.getElementById('beliebt'); el && window.scrollTo({ top: el.offsetTop, behavior: 'smooth' }); }, 60); },
+      goSummary: () => { if (!hasVehicle) this.setState({ sel: FULL }); this.go('summary'); },
+      backToConfig: () => this.go('config'), goM4: toM4,
+      selMake: s.sel.make, selModel: s.sel.model, selGen: s.sel.gen, selEngine: s.sel.engine,
+      makeOptions: opt(MAKES), modelOptions: opt(make && make.models), genOptions: opt(model && model.gens),
+      engineOptions: gen && gen.engines ? gen.engines.map(e => ({ id: e.id, label: `${e.ps} · ${e.name}` })) : [],
+      noModels: !make, noGens: !model, noEngines: !gen,
+      onMake: e => setSel({ make: e.target.value, model: '', gen: '', engine: '' }),
+      onModel: e => setSel({ model: e.target.value, gen: '', engine: '' }),
+      onGen: e => setSel({ gen: e.target.value, engine: '' }),
+      onEngine: e => setSel({ engine: e.target.value }),
+      quickDisabled: !hasVehicle, quickOpacity: hasVehicle ? 1 : 0.3,
+      goConfigFromQuick: () => hasVehicle && this.setState({ screen: 'config', zone: 'overview', detail: null }, () => window.scrollTo(0, 0)),
+      heroConfig: this.carCfg(heroBuild),
+      popular: [
+        { name: 'BMW M4', meta: 'F82 · 2014 – 2020', cta: 'Konfigurieren →', ctaColor: 'var(--acc-ink)', cursor: 'pointer', onClick: toM4 },
+        { name: 'BMW M2', meta: 'G87 · seit 2023', cta: 'Bald verfügbar', ctaColor: MUTE, cursor: 'default', onClick: () => {} },
+        { name: 'Audi RS3', meta: '8Y · seit 2021', cta: 'Bald verfügbar', ctaColor: MUTE, cursor: 'default', onClick: () => {} },
+        { name: 'VW Golf GTI', meta: 'Golf 8 · seit 2020', cta: 'Bald verfügbar', ctaColor: MUTE, cursor: 'default', onClick: () => {} }
+      ],
+      steps, tiles, stepTitle: `${cur.label} wählen`, canStepBack: s.step > 0, stepBack: () => this.setState({ step: s.step - 1 }),
+      cfgCols: isDesktop ? '268px minmax(0,1fr) 420px' : 'minmax(0,1fr)',
+      cfgAreas: isDesktop ? '"side stage panel"' : '"stage" "side" "panel"',
+      cfgHeight: isDesktop ? 'calc(100vh - 64px)' : 'auto',
+      stageHeight: isDesktop ? '100%' : (s.view === 'vlist' ? '70vh' : '52vh'),
+      catDir: isDesktop ? 'column' : 'row', navOy: isDesktop ? 'auto' : 'hidden', navFlex: isDesktop ? '1' : 'none',
+      catBorder: isDesktop ? '0' : '1px solid rgba(255,255,255,.1)', navPad: isDesktop ? '8px 0' : '12px 16px', navGap: isDesktop ? '0' : '8px',
+      panelPadBottom: isMobile ? '96px' : '0',
+      cats, activeCatName: activeCat.name, activeCatIdx: '0' + (catIdx + 1),
+      is3d: s.view === 'v3d', isList: s.view === 'vlist',
+      set3d: () => this.setState({ view: 'v3d' }), setList: () => this.setState({ view: 'vlist' }),
+      tab3dBg: s.view === 'v3d' ? PAPER : 'transparent', tab3dFg: s.view === 'v3d' ? INK : PAPER,
+      tabListBg: s.view === 'vlist' ? PAPER : 'transparent', tabListFg: s.view === 'vlist' ? INK : PAPER,
+      showOverviewBtn: s.view === 'v3d' && s.zone !== 'overview',
+      toOverview: () => this.setState({ zone: 'overview' }),
+      stageHint: isMobile ? 'Ziehen zum Drehen · Punkte antippen' : 'Ziehen zum Drehen · Scrollen zum Zoomen · Punkte anklicken',
+      carConfig: this.carCfg(s.build), zone: s.zone,
+      parts, listParts, sort: s.sort, onSort: e => this.setState({ sort: e.target.value }),
+      partCountLabel: `${catParts.length - 1} handverlesene Teile für deinen ${vehicleTitle}`,
+      showPartList: !showDetail, showDetail, detail,
+      closeDetail: () => this.setState({ detail: null, view: 'v3d' }),
+      resetCat: () => this.setState(st => ({ build: { ...st.build, [activeCat.id]: DEFAULT_BUILD[activeCat.id] }, detail: DEFAULT_BUILD[activeCat.id] })),
+      buildCountLabel, totalLabel, summaryRows,
+      copyLabel: s.copied ? 'Link kopiert' : 'Link teilen',
+      copyLink: () => {
+        const ids = CATS.map(c => s.build[c.id]).filter(id => !id.endsWith('serie')).join(',');
+        const u = location.href.split('#')[0] + '#build=' + ids;
+        (navigator.clipboard ? navigator.clipboard.writeText(u) : Promise.reject()).catch(() => {});
+        this.setState({ copied: true }); clearTimeout(this._ct); this._ct = setTimeout(() => this.setState({ copied: false }), 2000);
+      },
+      today: new Date().toLocaleDateString('de-DE')
+    };
+  }
+}
+</script>
+</body>
+</html>

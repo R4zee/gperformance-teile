@@ -1,0 +1,40 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.tsx';
+import { getHome } from '../lib/catalog';
+
+interface Props { title?: string; description?: string; footer?: boolean }
+const { title = 'G Performance – Handverlesene Teile', description = 'Handverlesene Tuning-Teile für dein Auto. Jedes Teil in 3D direkt am Fahrzeug, mit Empfehlungen von G Performance.', footer = true } = Astro.props;
+const home = await getHome();
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{title}</title>
+  <meta name="description" content={description}>
+  <link rel="canonical" href={canonical}>
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="de_DE">
+  <meta name="theme-color" content="#0a0a0b">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+  <div class="app">
+    <Header client:load fallbackKey={home.heroVehicle} />
+    <slot />
+    {footer && (
+      <footer class="ftr">
+        <div class="wrap ftr-in">
+          <span>© {new Date().getFullYear()} G Performance</span>
+          <nav aria-label="Rechtliches"><a href="/impressum/">Impressum</a><a href="/datenschutz/">Datenschutz</a><a href="/affiliate-hinweis/">Affiliate-Hinweis</a></nav>
+        </div>
+      </footer>
+    )}
+  </div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+{
+  "title": "BMW M4 F82 – BMW M Performance Schmiederad Y-Speiche 666M, 20\"",
+  "vehicle": "bmw/m4/f82",
+  "category": "felgen",
+  "order": 3,
+  "stock": false,
+  "brand": "BMW M Performance",
+  "name": "Schmiederad Y-Speiche 666M, 20\"",
+  "price": 4890,
+  "shop": "BMW Teileshop",
+  "url": "",
+  "note": "Original-Zubehör in Mattschwarz mit voller Garantie.",
+  "quote": "",
+  "visual": {
+    "rimStyle": "y",
+    "rimColor": "#222326",
+    "rimMetal": 0.4,
+    "rimRough": 0.55,
+    "rimSize": 0.26,
+    "caliper": "",
+    "drop": null,
+    "tips": "none",
+    "lip": "none",
+    "spoiler": "none",
+    "intake": "none"
+  }
+}

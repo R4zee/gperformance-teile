@@ -1,0 +1,18 @@
+---
+import Base from '../../../../../layouts/Base.astro';
+import Configurator from '../../../../../components/config/Configurator.tsx';
+import { getVehicles } from '../../../../../lib/catalog';
+import { CATS, type CatId, type VehicleCatalog } from '../../../../../lib/types';
+
+export async function getStaticPaths() {
+  return (await getVehicles()).flatMap(v => {
+    const [make, model, gen] = v.key.split('/');
+    return CATS.filter(c => v.parts.some(p => p.cat === c.id)).map(c => ({ params: { make, model, gen, cat: c.id }, props: { v, cat: c.id } }));
+  });
+}
+const { v, cat } = Astro.props as { v: VehicleCatalog; cat: CatId };
+const name = `${v.make.name} ${v.model.name} ${v.gen.name}`, catName = CATS.find(c => c.id === cat)!.name;
+---
+<Base title={`${catName} für den ${name} – G Performance`} description={`Die besten ${catName} für den ${name}, handverlesen von G Performance und in 3D am Auto ansehen.`} footer={false}>
+  <Configurator client:load cat={v} initialCat={cat} />
+</Base>

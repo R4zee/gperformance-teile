@@ -1,0 +1,27 @@
+{
+  "title": "BMW M4 F82 – KW Gewindefahrwerk Variante 3",
+  "vehicle": "bmw/m4/f82",
+  "category": "fahrwerk",
+  "order": 3,
+  "stock": false,
+  "brand": "KW",
+  "name": "Gewindefahrwerk Variante 3",
+  "price": 2649,
+  "shop": "Tuning-Shop",
+  "url": "",
+  "note": "Höhe, Zug- und Druckstufe getrennt einstellbar.",
+  "quote": "",
+  "visual": {
+    "rimStyle": "none",
+    "rimColor": "",
+    "rimMetal": null,
+    "rimRough": null,
+    "rimSize": null,
+    "caliper": "",
+    "drop": 0.045,
+    "tips": "none",
+    "lip": "none",
+    "spoiler": "none",
+    "intake": "none"
+  }
+}

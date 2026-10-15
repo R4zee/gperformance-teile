@@ -1,0 +1,80 @@
+{
+  "name": "BMW",
+  "order": 1,
+  "soon": false,
+  "models": [
+    {
+      "slug": "m2",
+      "name": "M2",
+      "meta": "F87 · G87",
+      "soon": true,
+      "generations": []
+    },
+    {
+      "slug": "m3",
+      "name": "M3",
+      "meta": "F80 · G80",
+      "soon": true,
+      "generations": []
+    },
+    {
+      "slug": "m4",
+      "name": "M4",
+      "meta": "F82 · G82",
+      "soon": false,
+      "generations": [
+        {
+          "slug": "f82",
+          "name": "F82",
+          "meta": "Coupé · 2014 – 2020",
+          "soon": false,
+          "model3d": "",
+          "engines": [
+            {
+              "slug": "s55",
+              "name": "3.0 Biturbo (S55)",
+              "ps": "431 PS"
+            },
+            {
+              "slug": "s55-competition",
+              "name": "3.0 Biturbo Competition",
+              "ps": "450 PS"
+            },
+            {
+              "slug": "s55-cs",
+              "name": "3.0 Biturbo CS",
+              "ps": "460 PS"
+            },
+            {
+              "slug": "s55-gts",
+              "name": "3.0 Biturbo GTS",
+              "ps": "500 PS"
+            }
+          ]
+        },
+        {
+          "slug": "g82",
+          "name": "G82",
+          "meta": "Coupé · seit 2021",
+          "soon": true,
+          "model3d": "",
+          "engines": []
+        }
+      ]
+    },
+    {
+      "slug": "m5",
+      "name": "M5",
+      "meta": "F90",
+      "soon": true,
+      "generations": []
+    },
+    {
+      "slug": "1er",
+      "name": "1er",
+      "meta": "F40",
+      "soon": true,
+      "generations": []
+    }
+  ]
+}

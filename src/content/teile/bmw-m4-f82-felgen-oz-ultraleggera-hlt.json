@@ -1,0 +1,27 @@
+{
+  "title": "BMW M4 F82 – OZ Racing Ultraleggera HLT, 20\", Bronze",
+  "vehicle": "bmw/m4/f82",
+  "category": "felgen",
+  "order": 4,
+  "stock": false,
+  "brand": "OZ Racing",
+  "name": "Ultraleggera HLT, 20\", Bronze",
+  "price": 2990,
+  "shop": "Amazon",
+  "url": "https://www.amazon.de/s?k=OZ%20Racing%20Ultraleggera%20HLT%2C%2020%22%2C%20Bronze%20BMW%20M4%20F82",
+  "note": "Flowforming-Felge, bewährter Klassiker in Bronze.",
+  "quote": "",
+  "visual": {
+    "rimStyle": "thin12",
+    "rimColor": "#8c6b3f",
+    "rimMetal": 0.8,
+    "rimRough": 0.35,
+    "rimSize": 0.26,
+    "caliper": "",
+    "drop": null,
+    "tips": "none",
+    "lip": "none",
+    "spoiler": "none",
+    "intake": "none"
+  }
+}

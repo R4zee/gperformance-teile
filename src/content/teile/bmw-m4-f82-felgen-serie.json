@@ -1,0 +1,27 @@
+{
+  "title": "BMW M4 F82 – Serie M Doppelspeiche 437M, 19\"",
+  "vehicle": "bmw/m4/f82",
+  "category": "felgen",
+  "order": 1,
+  "stock": true,
+  "brand": "Serie",
+  "name": "M Doppelspeiche 437M, 19\"",
+  "price": null,
+  "shop": "",
+  "url": "",
+  "note": "Geschmiedete Serienfelge in Ferricgrau.",
+  "quote": "",
+  "visual": {
+    "rimStyle": "double",
+    "rimColor": "#c3c5c8",
+    "rimMetal": null,
+    "rimRough": null,
+    "rimSize": 0.245,
+    "caliper": "",
+    "drop": null,
+    "tips": "none",
+    "lip": "none",
+    "spoiler": "none",
+    "intake": "none"
+  }
+}

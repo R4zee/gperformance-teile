@@ -1,0 +1,27 @@
+{
+  "title": "BMW M4 F82 – BMW M Performance Frontaufsatz Carbon",
+  "vehicle": "bmw/m4/f82",
+  "category": "front",
+  "order": 2,
+  "stock": false,
+  "brand": "BMW M Performance",
+  "name": "Frontaufsatz Carbon",
+  "price": 1190,
+  "shop": "BMW Teileshop",
+  "url": "",
+  "note": "Sichtcarbon, Original-Passform.",
+  "quote": "Original-Passform und echte Sichtcarbon-Qualität. Kein Nachbessern nötig.",
+  "visual": {
+    "rimStyle": "none",
+    "rimColor": "",
+    "rimMetal": null,
+    "rimRough": null,
+    "rimSize": null,
+    "caliper": "",
+    "drop": null,
+    "tips": "none",
+    "lip": "carbon",
+    "spoiler": "none",
+    "intake": "none"
+  }
+}

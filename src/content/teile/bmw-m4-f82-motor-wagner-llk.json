@@ -1,0 +1,27 @@
+{
+  "title": "BMW M4 F82 – Wagner Tuning Competition Ladeluftkühler",
+  "vehicle": "bmw/m4/f82",
+  "category": "motor",
+  "order": 3,
+  "stock": false,
+  "brand": "Wagner Tuning",
+  "name": "Competition Ladeluftkühler",
+  "price": 1349,
+  "shop": "eBay",
+  "url": "https://www.ebay.de/sch/i.html?_nkw=Wagner%20Tuning%20Competition%20Ladeluftk%C3%BChler%20BMW%20M4%20F82",
+  "note": "Größerer Kern für stabile Ladelufttemperaturen.",
+  "quote": "",
+  "visual": {
+    "rimStyle": "none",
+    "rimColor": "",
+    "rimMetal": null,
+    "rimRough": null,
+    "rimSize": null,
+    "caliper": "",
+    "drop": null,
+    "tips": "none",
+    "lip": "none",
+    "spoiler": "none",
+    "intake": "none"
+  }
+}

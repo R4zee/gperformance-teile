@@ -1,0 +1,7 @@
+{
+  // Cloudflare Workers (kostenloser Plan). Der Astro-Adapter ergänzt main/assets beim Build
+  // (dist/server/wrangler.json). Statische Seiten kommen aus dist/client, nur /keystatic läuft als Worker.
+  "name": "gperformance-teile",
+  "compatibility_date": "2026-09-01",
+  "compatibility_flags": ["nodejs_compat"]
+}

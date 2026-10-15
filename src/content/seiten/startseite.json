@@ -1,0 +1,35 @@
+{
+  "heroVehicle": "bmw/m4/f82",
+  "heroTitle": "BMW M4 F82",
+  "heroBuild": [
+    "bmw-m4-f82-felgen-bbs-fi-r",
+    "bmw-m4-f82-bremsen-brembo-gt-6",
+    "bmw-m4-f82-fahrwerk-kw-v3",
+    "bmw-m4-f82-abgas-akrapovic-slip-on",
+    "bmw-m4-f82-front-m-performance-carbon",
+    "bmw-m4-f82-heck-m-performance-spoiler",
+    "bmw-m4-f82-motor-eventuri-carbon"
+  ],
+  "popular": [
+    {
+      "name": "BMW M4",
+      "meta": "F82 · 2014 – 2020",
+      "vehicle": "bmw/m4/f82"
+    },
+    {
+      "name": "BMW M2",
+      "meta": "G87 · seit 2023",
+      "vehicle": ""
+    },
+    {
+      "name": "Audi RS3",
+      "meta": "8Y · seit 2021",
+      "vehicle": ""
+    },
+    {
+      "name": "VW Golf GTI",
+      "meta": "Golf 8 · seit 2020",
+      "vehicle": ""
+    }
+  ]
+}

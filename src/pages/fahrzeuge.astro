@@ -1,0 +1,11 @@
+---
+import Base from '../layouts/Base.astro';
+import VehicleSelect from '../components/select/VehicleSelect.tsx';
+import { getMakes, getVehicles } from '../lib/catalog';
+const [makes, vehicles] = await Promise.all([getMakes(), getVehicles()]);
+---
+<Base title="Fahrzeug wählen – G Performance" description="Marke, Modell, Generation und Motor wählen und passende, handverlesene Teile in 3D ansehen.">
+  <main class="sel">
+    <VehicleSelect client:load makes={makes} live={vehicles.map(v => v.key)} />
+  </main>
+</Base>

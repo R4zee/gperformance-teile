@@ -1,0 +1,27 @@
+{
+  "title": "BMW M4 F82 – Eventuri Carbon-Ansaugsystem S55",
+  "vehicle": "bmw/m4/f82",
+  "category": "motor",
+  "order": 2,
+  "stock": false,
+  "brand": "Eventuri",
+  "name": "Carbon-Ansaugsystem S55",
+  "price": 1890,
+  "shop": "Tuning-Shop",
+  "url": "",
+  "note": "Geschlossenes Carbon-Gehäuse mit Venturi-Einlass.",
+  "quote": "Sieht unter der Haube unfassbar aus, und der Turbo-Sound ist ab dem ersten Meter da.",
+  "visual": {
+    "rimStyle": "none",
+    "rimColor": "",
+    "rimMetal": null,
+    "rimRough": null,
+    "rimSize": null,
+    "caliper": "",
+    "drop": null,
+    "tips": "none",
+    "lip": "none",
+    "spoiler": "none",
+    "intake": "carbon"
+  }
+}

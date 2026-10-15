@@ -1,0 +1,27 @@
+{
+  "title": "BMW M4 F82 – BMW M Carbon-Keramik-Bremse, gold",
+  "vehicle": "bmw/m4/f82",
+  "category": "bremsen",
+  "order": 3,
+  "stock": false,
+  "brand": "BMW M",
+  "name": "Carbon-Keramik-Bremse, gold",
+  "price": 8950,
+  "shop": "BMW Teileshop",
+  "url": "",
+  "note": "Kaum Fading, deutlich weniger ungefederte Masse.",
+  "quote": "",
+  "visual": {
+    "rimStyle": "none",
+    "rimColor": "",
+    "rimMetal": null,
+    "rimRough": null,
+    "rimSize": null,
+    "caliper": "#c79a2c",
+    "drop": null,
+    "tips": "none",
+    "lip": "none",
+    "spoiler": "none",
+    "intake": "none"
+  }
+}
