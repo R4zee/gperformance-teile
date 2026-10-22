@@ -16,9 +16,13 @@ Nicht erlaubt: *CC-BY-NC*, *Editorial*, *Personal use*, und **alles, was aus Spi
 Markenlogos (BMW-Emblem, Niere mit Logo) besser entfernen.
 
 Stand der Recherche (Oktober 2026): Für den M4 F82 wurde **kein kostenloses Modell mit eindeutig sauberer Lizenz** gefunden. Kandidaten zum Prüfen:
-- Sketchfab-Profil *BlackSnow02* (M4 F82, Lizenz ungeprüft)
+- ~~Sketchfab *Black Snow* „BMW M4 f82“ (CC-BY)~~ – **geprüft und verworfen (22.10.2026):** enthält Materialien aus BeamNG.drive (`etkc`, `etk_engine_i6`, `etk_gauges`), Bremsen aus einem Aston-Martin-DB11-Modell (`amdb11_*`) und alle Tuning-Varianten eines Mod-Autos übereinander (`ARm4_*`), über 500 000 Dreiecke. Sehr wahrscheinlich ein Spiel-Mod-Export.
 - *vecarz* „M4 F82 Razor“ (CC-BY, aber Verdacht auf NFS-Rip, daher **nicht** verwenden, solange die Herkunft unklar ist)
 - Gekaufte Alternative: Hum3D / CGTrader, ca. 100–250 $, auf Lizenz „real-time / web“ achten
+
+### Schnellprüfung einer Datei
+
+Material- und Objektnamen verraten Spiel-Rips oft sofort. Mit `npx @gltf-transform/cli inspect modell.glb` die Listen *MESHES* und *MATERIALS* ansehen. Warnzeichen sind Spiel- oder Fremdmarken-Präfixe (z. B. `etk`, `fh5_`, `amdb11_`), doppelte Teil-Varianten und `*_DiffuseAOSO`-Texturen.
 
 ## Aufbau, den der Konfigurator erwartet
 
